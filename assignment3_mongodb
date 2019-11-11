@@ -1,0 +1,105 @@
+db.jobs.insertMany([
+    {
+       Name:"Debut Infotech Mohali",
+       address:"mohali,8b",
+       location:{
+          type:"Point",
+          coordinates:[76.7323,30.6963]
+       },
+       description:"job for junior software developer",
+       salary:16666,
+       status:"Available",
+       job_shifts:{
+          start_date: new Date(2016-05-11),
+          end_date: new Date(2019-05-12),
+          status:"Available"
+       }
+    },
+    {
+       Name:"Seasia Infotech Mohali",
+       address:"Phase 7,Mohali",
+       location:{
+          type:"Point",
+          coordinates:[76.7296,30.7040]
+       },
+       description:"software developer",
+       salary:12000,
+       status:"Available",
+       job_shifts:{
+          start_date: new Date(2015-05-11),
+          end_date: new Date(2016-05-12),
+          status:"Available"
+       }
+    },
+    {
+       Name:"Next Page it",
+       address:"Phase 7,Mohali",
+       location:{
+          type:"Point",
+         coordinates:[76.7794,30.7333]
+       },
+       description:"Sr.software developer",
+       salary:32000,
+       status:"Available",
+       job_shifts:{
+          start_date: new Date(2019-05-11),
+          end_date: new Date(2019-05-12),
+          status:"Available"
+      }
+    },
+    {
+       Name:"Software solutions",
+      address:"Ludhiana",
+      location:{
+         type:"Point",
+         coordinates:[75.8573,30.9010]
+      },
+      description:"Team Lead",
+      salary:100000,
+      status:"Un_available",
+      job_shifts:{
+         start_date: new Date(2019-09-11),
+         end_date: new Date(2019-09-12),
+         status:"Un_available"
+      }
+    },
+    {
+             Name:"Ameotech solutions",
+      address:"Khanna",
+      location:{
+         type:"Point",
+         coordinates:[76.2170,30.7071]
+      },
+      description:"Team Lead Manager",
+      salary:150000,
+      status:"Available",
+      job_shifts:{
+         start_date: new Date(2019-11-11),
+         end_date: new Date(2019-11-12),
+         status:"Available"
+      }
+    }
+ ]) 
+
+ db.jobs.createIndex({
+    location:"2dsphere"
+ })
+
+  
+db.jobs.find(
+   {
+      location:
+      {
+         $near:
+         {
+            $geometry:
+            {
+               type:"Point",
+               coordinates:[76.707770,30.715260]
+            },
+            $minDistance:0,
+            $maxDistance:20000
+         }
+      }
+   }
+)
